@@ -15,7 +15,7 @@ from selenium.webdriver.common.keys import Keys
 import pyperclip
 import os
 options = ChromeOptions()
-# options.add_argument("--headless=new")
+options.add_argument("--headless=new")
 
 class NaverLogin:
     def __init__(self):
