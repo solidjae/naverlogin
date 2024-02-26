@@ -15,6 +15,7 @@ from selenium.webdriver.common.keys import Keys
 import pyperclip
 import os
 options = ChromeOptions()
+# options.add_argument("--headless=new")
 
 class NaverLogin:
     def __init__(self):
@@ -61,26 +62,19 @@ class NaverLogin:
 
         driver.switch_to.window(driver.window_handles[0]) # switch back to original window
         
-        for i in range (0, 10):
-            while True:
-                try:
-                    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="seller-lnb"]/div/div[1]/ul/li[14]/a'))) # click on statistics
-                    driver.find_element(By.XPATH, '//*[@id="seller-lnb"]/div/div[1]/ul/li[14]/a').click()
+        WebDriverWait(driver, 999).until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[1]/div/div/div[1]/button'))) # wait till close button appears
+        driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div[1]/button').click()
 
-                    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="seller-lnb"]/div/div[1]/ul/li[14]/ul/li[7]/a'))) # click on 고객현황
-                    driver.find_element(By.XPATH, '//*[@id="seller-lnb"]/div/div[1]/ul/li[14]/ul/li[7]/a').click()
-                    
-                    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="seller-content"]/ui-view/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/button'))) # click on 다운로드
-                    driver.find_element(By.XPATH, '//*[@id="seller-content"]/ui-view/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/button').click()
-                    break
-                except Exception as e:
-                    print(e)
-                    print('retrying!')
-                    WebDriverWait(driver, 50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="seller-content"]/div/div/div/div[1]/div[1]/button'))) # wait till close button appears
-                    driver.find_element(By.XPATH, '//*[@id="seller-content"]/div/div/div/div[1]/div[1]/button').click()
-                    continue
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="seller-lnb"]/div/div[1]/ul/li[14]/a'))) # click on statistics
+        driver.find_element(By.XPATH, '//*[@id="seller-lnb"]/div/div[1]/ul/li[14]/a').click()
 
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="seller-lnb"]/div/div[1]/ul/li[14]/ul/li[7]/a'))) # click on 고객현황
+        driver.find_element(By.XPATH, '//*[@id="seller-lnb"]/div/div[1]/ul/li[14]/ul/li[7]/a').click()
         
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="seller-content"]/ui-view/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/button'))) # click on 다운로드
+        driver.find_element(By.XPATH, '//*[@id="seller-content"]/ui-view/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/button').click()
+
+
 
 
         driver.quit()
